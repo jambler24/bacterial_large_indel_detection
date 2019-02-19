@@ -242,6 +242,7 @@ def getPerBaseCoverage(bamFilePath):
 
 	return call(bwa_build_call, stdout=outfileCatch)
 
+
 def getNegStrandPerBaseCoverage(bamFilePath):
 
 	#posStrand_call = [bedtoolsPath, 'genomecov', '-ibam', bamFilePath, '-d', '-strand', '+']
@@ -256,6 +257,7 @@ def getNegStrandPerBaseCoverage(bamFilePath):
 
 	return call(negStrand_call, stdout=negStrandCatch)
 
+
 def getPosStrandPerBaseCoverage(bamFilePath):
 
 	#posStrand_call = [bedtoolsPath, 'genomecov', '-ibam', bamFilePath, '-d', '-strand', '+']
@@ -269,7 +271,6 @@ def getPosStrandPerBaseCoverage(bamFilePath):
 	posStrandCatch = open(temp_folder + 'outStreamPosStrand.txt', 'w')
 
 	return call(posStrand_call, stdout=posStrandCatch)
-
 
 
 def formatCoverageFiles():
@@ -409,6 +410,7 @@ def findMappingPeaksOld(dataframe, threshold, windowSize=5, stepSize=3, col='bot
 	return uniqueReturnPosList
 	#dataframe[]
 
+
 def findMappingPeaks(dataframe, threshold, windowSize=5, stepSize=3, col='both'):
 
 	posCount = 0
@@ -426,6 +428,7 @@ def findMappingPeaks(dataframe, threshold, windowSize=5, stepSize=3, col='both')
 
 	return returnPosList
 	#dataframe[]
+
 
 def findMappingTroughs(dataframe, threshold, windowSize=5, stepSize=3, col='both'):
 
@@ -508,6 +511,7 @@ def removeRegion(startPos, stopPos, dataframe):
 
 	return dataframe
 
+
 def outParseToGFF(windowPassList, gffName, minDpth, chromName, minWindow=50):
 
 	outFile = open(temp_folder + gffName + '_potential_deletions.gff3', 'w')
@@ -537,6 +541,7 @@ def outParseToGFF(windowPassList, gffName, minDpth, chromName, minWindow=50):
 			outFile.write(outLineString)
 
 			count += 1
+
 
 def outParseDeletionsToGFF(dataframe, windowPassList, gffName, minDpth, chromName, minWindow=50):
 
@@ -604,8 +609,6 @@ def outParseDeletionsToGFF(dataframe, windowPassList, gffName, minDpth, chromNam
 			#print 'Result right:'
 			#print is_right_edge
 
-
-
 			if is_left_edge is True or is_right_edge is True:
 
 				if is_left_edge is True:
@@ -654,6 +657,7 @@ def findsRNAregions(bamFilePath, annoFile, covSD, annoOutName, windowSize=50, st
 	print "Formatting for GFF3 -", annoOutName
 	outParseToGFF(peakList, annoOutName, covThreshold, chrName)
 
+
 def getDominantStrand(dataframe, startPos, stopPos):
 
 	#print dataframe[int(startPos):int(stopPos)].sum()
@@ -672,12 +676,12 @@ def getDominantStrand(dataframe, startPos, stopPos):
 	return strandSymbol
 
 
-
 def getChromName(annotationFile):
 
 	temp_gff = input_parser(annotationFile)
 
 	return temp_gff[0][0] 
+
 
 def combineAllGff(GFFdir):
 
@@ -699,6 +703,7 @@ def combineAllGff(GFFdir):
 	uniqueReturnPosList = list(set(posList))
 
 	outParseToGFF(uniqueReturnPosList, 'Combined_sRNA_potentials', '2SD', 'NZ_CP012090.1')
+
 
 def seqValStats(geneID, annoFile, genomeFile, e_val=0.05):
 
@@ -787,16 +792,12 @@ def check_for_edge_window(x_np_array, y_np_array, grad_threshold, orientation, p
 
 		gradient = (ave_2 - ave_1) / window_size
 
-
 		if gradient > grad_threshold:
 			is_edge = True
 
 		position += 1
 
-
-
-	if plot_curve == True:
-
+	if plot_curve is True:
 
 		pl.plot(x_np_array, y_np_array, 'o', label='data')
 		pl.ylim(0, 120.05)
@@ -812,7 +813,6 @@ def check_for_edge_window(x_np_array, y_np_array, grad_threshold, orientation, p
 		pl.clf()
 
 	return is_edge
-
 
 
 def check_for_edge(x_np_array, y_np_array, rate_threshold, orientation, plot_curve=False, del_count=0):
@@ -1051,9 +1051,9 @@ refAnno = "/Users/panix/Desktop/W-148-StudyVersion/W_148_NCBI.gff3"
 #plt.savefig('/Volumes/HDD/Genomes/M_tuberculosis/sRNA/sRNAdiscovery/mappingTest/noLogcountsRNAsorted.svg', format='svg', dpi=1200)
 
 temp_folder = '/Users/panix/W-148_mapping/temp'
-bothbamFilePath = '/Volumes/External/CIDRI_Data/TASH_TERRY_DATA/del_detection/inBamFiles/sample_2_condition_genomeic_replicate_1_filtered_sorted.bam'
-forwardbamFilePath = '/Volumes/External/CIDRI_Data/TASH_TERRY_DATA/del_detection/inBamFiles/sample_2_condition_genomeic_replicate_1_filtered_sorted_fwd.bam'
-reversebamFilePath = '/Volumes/External/CIDRI_Data/TASH_TERRY_DATA/del_detection/inBamFiles/sample_2_condition_genomeic_replicate_1_filtered_sorted_rev.bam'
+#bothbamFilePath = '/Volumes/External/CIDRI_Data/TASH_TERRY_DATA/del_detection/inBamFiles/sample_2_condition_genomeic_replicate_1_filtered_sorted.bam'
+#forwardbamFilePath = '/Volumes/External/CIDRI_Data/TASH_TERRY_DATA/del_detection/inBamFiles/sample_2_condition_genomeic_replicate_1_filtered_sorted_fwd.bam'
+#reversebamFilePath = '/Volumes/External/CIDRI_Data/TASH_TERRY_DATA/del_detection/inBamFiles/sample_2_condition_genomeic_replicate_1_filtered_sorted_rev.bam'
 
 #candidateGFF = '/Volumes/HDD/Genomes/M_tuberculosis/sRNA/sRNAdiscovery/Combined_sRNA_potentials_potential_sRNA.gff3'
 
